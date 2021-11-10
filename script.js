@@ -60,31 +60,60 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game() {
-  const numberOfRound = 5;
+//ui code
 
-  for (let i = 0; i < numberOfRound; i++) {
-    console.log(`%c ${"Round - " + (i + 1)}`,'font-size: 16px; font-weight: bold; background-color: #BC8CF2');
-    const playerSelection = playerPlay();
-    const computerSelection = computerPlay();
-     
-    console.log(playRound(playerSelection, computerSelection));
-    console.log("Computer Selection: " + computerSelection);
-    console.log("Player Selection: " + playerSelection);
-     
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+const restartBtn = document.querySelector("#restart");
+
+//div for displaying results
+const displayScore = document.querySelector(".display-score");
+const displayResult = document.querySelector(".display-result");
+const playerScoreDisplay = document.createElement("div");
+const computerScoreDisplay = document.createElement("div");
+const result = document.createElement("div");
+const winner = document.querySelector(".winner");
+
+function game(playerSelection) {
+  const computerSelection = computerPlay();
+  console.log("Computer Selection: " + computerSelection);
+  console.log("Player Selection: " + playerSelection);
+  result.textContent = playRound(playerSelection, computerSelection);
+  playerScoreDisplay.textContent = `Player-Score: ${playerScore}`;
+  computerScoreDisplay.textContent = `Computer-Score: ${computerScore}`;
+
+  if (playerScore == 5) {
+    console.log("You win:");
+    winner.textContent = "You win: the game!!!";
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  } else if (computerScore == 5) {
+    console.log("Computer win: you lose, you loser!!!");
+    winner.textContent = "Computer win: you lose, you loser!!!";
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
   }
-  console.log("\n");
-  let scoreMessage = `Computer-Score=${computerScore} Your-Score=${playerScore} Tie=${tie}`;
-  let result = "";
-  if (playerScore > computerScore) {
-    result = "You win the game! ";
-  } else if (computerScore > playerScore) {
-    result = "You Lose the game! ";
-  } else {
-    result =  "Game is tie! ";
-  }
-  console.log(`%c ${result}`, 'font-size: 18px; background-color: #AA14F0; color: #fff');
-  console.log(scoreMessage);
 }
-console.log('%c Welcome to the console!','font-size: 34px; font-weight: bold; background-color: red; color: green;');
-console.log('%c Call game() function to start playing the game.','font-size: 24px; font-weight: bold; background-color: green; color: red;')
+rockBtn.addEventListener("click", () => {
+  game("rock");
+});
+
+paperBtn.addEventListener("click", () => {
+  game("paper");
+});
+
+scissorsBtn.addEventListener("click", () => {
+  game("scissors");
+});
+
+restartBtn.addEventListener("click", () => {
+  location.reload();
+});
+
+displayScore.appendChild(playerScoreDisplay);
+displayScore.appendChild(computerScoreDisplay);
+
+displayResult.appendChild(result);
