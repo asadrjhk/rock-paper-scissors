@@ -58,14 +58,18 @@ function playRound(playerSelection, computerSelection) {
   } else {
     return "This round is Tie";
   }
+
+
 }
 
 //ui code
+const buttons = document.querySelectorAll('button');
 
+//buttons
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
-const restartBtn = document.querySelector("#restart");
+const restartBtn = document.querySelector('#restart');
 
 //div for displaying results
 const displayScore = document.querySelector(".display-score");
@@ -73,7 +77,9 @@ const displayResult = document.querySelector(".display-result");
 const playerScoreDisplay = document.createElement("div");
 const computerScoreDisplay = document.createElement("div");
 const result = document.createElement("div");
-const winner = document.querySelector(".winner");
+const winner = document.querySelector('.winner');
+playerScoreDisplay.textContent = "Player-Score: 0";
+computerScoreDisplay.textContent = "Computer-Score: 0";
 
 function game(playerSelection) {
   const computerSelection = computerPlay();
@@ -86,34 +92,54 @@ function game(playerSelection) {
   if (playerScore == 5) {
     console.log("You win:");
     winner.textContent = "You win: the game!!!";
+    winner.classList.add('active');
     rockBtn.disabled = true;
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
   } else if (computerScore == 5) {
     console.log("Computer win: you lose, you loser!!!");
-    winner.textContent = "Computer win: you lose, you loser!!!";
+    winner.textContent = "Computer win: the game!!!";
     rockBtn.disabled = true;
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
+    winner.classList.add('active');
   }
 }
+  
 rockBtn.addEventListener("click", () => {
   game("rock");
+  rockBtn.classList.add("active");
 });
+ 
 
 paperBtn.addEventListener("click", () => {
   game("paper");
+  paperBtn.classList.add("active");
 });
 
 scissorsBtn.addEventListener("click", () => {
   game("scissors");
+  scissorsBtn.classList.add("active");
 });
 
-restartBtn.addEventListener("click", () => {
+restartBtn.addEventListener('click', () => {
   location.reload();
 });
 
+
+//removeing active class when transition end
+function removeTransition(event) {
+  if (event.propertyName !== 'transform') return; //skip if its not a transform property
+  this.classList.remove('active'); 
+   
+}
+buttons.forEach(button => {
+  button.addEventListener('transitionend', removeTransition);
+})
+
+//adding to the dom
 displayScore.appendChild(playerScoreDisplay);
 displayScore.appendChild(computerScoreDisplay);
 
 displayResult.appendChild(result);
+

@@ -9,25 +9,43 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <h1 style="background-color: #000d6b; color: #fbfbfb">
-      Play the Rock-Paper-Scissors Game in the console.
-    </h1>
-    <h2>Open the console to play the game.</h2>
-
-    <!-- ui code -->
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-
-
-    <div class="display">
-      <div class="display-score"></div>
-      <div class="display-result"></div>
-      <div class="winner"></div>
+    <div class="header">
+      Play the Rock-Paper-Scissors Game
     </div>
-
-    <button id="restart">Restart</button>
-     
+  
+    <div class="main">
+      <div class="sidebar">
+        <div class="heading">Rule of the Game</div>
+        <div class="rules">
+          <ul>
+            <li>Rock beats scissors.</li>
+            <li>Scissors beats paper.</li>
+            <li>Paper beats rock.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <!-- ui code -->
+        <div class="buttons">
+          <button id="rock">Rock</button>
+          <button id="paper">Paper</button>
+          <button id="scissors">Scissors</button>
+        </div>
+  
+  
+      <div class="display">
+        <div class="score-result">
+          <div class="display-score">Score:</div>
+          <div class="display-result">Each Round Result:</div>
+        </div>
+        <div class="winner">Final Result:</div>
+      </div>
+      <button id="restart">Restart</button>
+      </div>
+    </div>
+    <div class="footer">
+      Made With ❤️
+    </div>
   </body>
   </body>
 </html>
